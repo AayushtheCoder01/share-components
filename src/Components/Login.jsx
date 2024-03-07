@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { account } from '../appwrite/appwriteConfig'
 
 
@@ -87,12 +87,12 @@ function Login() {
 
               <div className="flex items-center justify-between">
                 <div className="text-sm">
-                  <a
-                    href="/signup"
+                  <Link
+                    to={'/signup'}
                     className="font-medium text-indigo-600 hover:text-indigo-500"
                   >
                     Don't have Account, Sign Up
-                  </a>
+                  </Link>
                 </div>
               </div>
 
