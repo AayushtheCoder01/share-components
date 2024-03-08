@@ -16,9 +16,11 @@ function Home() {
       function(response) {
         setUserData(response)
         setLoading(false)
+        console.log(response)
       },
       function (error) {
         console.log(error)
+        navigate('/login')
       }
     )
   }

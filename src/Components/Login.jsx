@@ -28,11 +28,16 @@ function Login() {
   }
 
   useEffect(() => {
-    const loginSession  = account.get()
-    console.log(loginSession)
-    if(loginSession) {
-      navigate('/home')
-    }
+    // const promise = account.get()
+    // promise.then(
+    //   function(response) {
+    //     setUserData(response)
+    //     setLoading(false)
+    //   },
+    //   function (error) {
+    //     console.log(error)
+    //   }
+    // )
   }, [])
 
   return (
