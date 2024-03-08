@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { account } from '../appwrite/appwriteConfig'
 
@@ -26,6 +26,13 @@ function Login() {
     )
 
   }
+
+  useEffect(() => {
+    const loginSession  = account.get()
+    console.log(loginSession)
+    navigate('/home')
+  }, [])
+
   return (
     <>
     <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
