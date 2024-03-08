@@ -30,7 +30,9 @@ function Login() {
   useEffect(() => {
     const loginSession  = account.get()
     console.log(loginSession)
-    navigate('/home')
+    if(loginSession) {
+      navigate('/home')
+    }
   }, [])
 
   return (
