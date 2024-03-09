@@ -7,9 +7,25 @@ function Card({data}) {
   const htmlString = code;
   const parsedHtml = parse(htmlString);
   return (
-    <div className="min-w-[300px] max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md m-4">
+    // <div className="min-w-[300px] max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md m-4">
+    //   <div className="flex items-center justify-center bg-gray-200 h-48">
+    //   {parsedHtml}
+    //   </div>
+    //   <div className="p-4">
+    //     <h2 className="text-xl font-semibold mb-2">{component}</h2>
+    //     <p className="text-gray-700">{description}</p>
+    //     <div className="mt-4">
+    //       <Link to={`/components/${$id}`} className="text-blue-500 hover:underline">
+    //         Get Code
+    //       </Link>
+    //     </div>
+    //   </div>
+    // </div>
+<div className="w-12/12">
+  <div className="w-12/12">
+    <div className="min-w-[400px] mx-auto bg-white rounded-md overflow-hidden shadow-md m-4">
       <div className="flex items-center justify-center bg-gray-200 h-48">
-      {parsedHtml}
+        {parsedHtml}
       </div>
       <div className="p-4">
         <h2 className="text-xl font-semibold mb-2">{component}</h2>
@@ -21,6 +37,9 @@ function Card({data}) {
         </div>
       </div>
     </div>
+  </div>
+</div>
+
   )
 }
 
