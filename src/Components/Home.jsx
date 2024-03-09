@@ -33,7 +33,7 @@ function Home() {
 
     <div className='flex h-10 m-1 mt-5 w-full justify-center'>
     <button className="bg-green-500 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline"
-    onClick={() => (navigate('/home/add-component'))}
+    onClick={() => (navigate('/home/add-component')) }
     >
       Add Components
     </button>

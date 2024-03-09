@@ -27,18 +27,7 @@ function Login() {
 
   }
 
-  useEffect(() => {
-    // const promise = account.get()
-    // promise.then(
-    //   function(response) {
-    //     setUserData(response)
-    //     setLoading(false)
-    //   },
-    //   function (error) {
-    //     console.log(error)
-    //   }
-    // )
-  }, [])
+
 
   return (
     <>
