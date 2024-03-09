@@ -5,6 +5,7 @@ import { Functions } from 'appwrite'
 function Component() {
   // this is shome component.
     const [data, setData] = useState([])
+    const [loadind, setLoading] = useState(true)
 
     useEffect(() => {
       const promise = databases.listDocuments("65e8b719ab2350ba6fb4", "65e8b7272cd65c037a79")
@@ -12,6 +13,7 @@ function Component() {
       promise.then(
         function(response) {
             setData(response.documents)
+            setLoading(false)
         },
         function(error) {
             console.log(error)
@@ -21,8 +23,8 @@ function Component() {
     
   return (
     <>
-    <div className='flex flex-row w-full'>
-    <aside class="rounded-xl mt-4 hidden md:flex mx-2 flex flex-col w-64 h-screen px-4 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
+    {loadind? <p className='text-center mt-20'>Loading...</p> :<div className='flex mt-10 flex-row w-full overflow-hidden'>
+    <aside class="rounded-xl hidden md:flex flex flex-col w-64 h-screen px-4 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
     <a href="#" class="mx-auto">
         {/* <img class="w-auto h-6 sm:h-7" src="https://merakiui.com/images/full-logo.svg" alt=""> */}
     </a>
@@ -78,6 +80,7 @@ function Component() {
     ))}
     </div>
     </div>
+     }
     </>
   )
 }
