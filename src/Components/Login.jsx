@@ -17,7 +17,7 @@ function Login() {
 
     promise.then(
       function(response) {
-        console.log(response)
+        console.log(response.$id)
         navigate('/home')
       }, 
       function(response) {

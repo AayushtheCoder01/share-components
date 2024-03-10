@@ -4,6 +4,7 @@ import { account } from '../appwrite/appwriteConfig'
 import CreateComponent from './AddNew'
 import { useNavigate } from 'react-router-dom'
 import Component from './Component'
+import { Button } from './ui/button'
 
 function Home() {
   const navigate = useNavigate()
@@ -32,11 +33,7 @@ function Home() {
     <Header data = {userData}/>
 
     <div className='flex h-10 m-1 mt-5 w-full justify-center'>
-    <button className="bg-green-500 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline"
-    onClick={() => (navigate('/home/add-component')) }
-    >
-      Add Components
-    </button>
+    <Button onClick={() => (navigate('/home/add-component')) }>Add Components</Button>
     </div>
     
     <div className='p-2 mx-10'>
@@ -46,4 +43,4 @@ function Home() {
   )
 }
 
-export default Home
+export default React.memo(Home)

@@ -85,4 +85,4 @@ function Component() {
   )
 }
 
-export default Component
+export default React.memo(Component)

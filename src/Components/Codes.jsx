@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { databases } from '../appwrite/appwriteConfig';
 import CodeSnippit from './CodeSnippit';
 import '../App.css'
+import { Button } from './ui/button';
  
 
 function Codes() {
