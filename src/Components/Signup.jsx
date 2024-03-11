@@ -30,12 +30,6 @@ function Signup() {
     )
   }
 
-  //signup with google.
-
-  const handleGoogle = async (e) => {
-    e.preventDefault()
-    account.createOAuth2Session('google', 'https://share-components.vercel.app/home', "https://share-components.vercel.app/signup");
-  }
   return (
     <>
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -139,7 +133,7 @@ function Signup() {
                 </div>
               </div>
 
-              <div className="mt-6 grid grid-cols-3 gap-3" onClick={(e) => handleGoogle(e)}>
+              <div className="mt-6 grid grid-cols-3 gap-3">
                 <div>
                   <a
                     // href="/signup"
