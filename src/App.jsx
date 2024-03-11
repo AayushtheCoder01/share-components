@@ -20,7 +20,7 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/home' element={<Home/>}/>
-        <Route path='/components/:id' element={<Codes/>}/>
+        <Route path='/components/codes/:id' element={<Codes/>}/>
         <Route path='/home/add-component' element={<CreateComponent/>}/>
       </Routes>
     </BrowserRouter>

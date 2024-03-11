@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { account, databases } from '../appwrite/appwriteConfig'
 import {v4 as uuidv4} from 'uuid'
 import { useNavigate } from 'react-router-dom'
-
-
+import { Alert, AlertDescription, AlertTitle } from "../Components/ui/alert"
+import FormCard from './component/form-card'
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 function CreateComponent() {
+  const [uploadDone, setUplaodDone] = useState(false)
   const navigate = useNavigate()
   const [code, setCode] = useState("")
   const [component, setComponent] = useState("")
@@ -21,17 +23,30 @@ function CreateComponent() {
     }).then(
       function(response) {
         console.log(response)
-        alert('done')
+        setUplaodDone(true)
+        setTimeout(() => {
+          navigate('/home')
+        }, 2500);
       },
       function(error) {
         console.log(error)
       }
     )
-    navigate('/home')
   }
   return (
     <>
-      <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    {uploadDone? <Alert>
+  <AlertTitle><IoMdCheckmarkCircleOutline />Congratulations</AlertTitle>
+  <AlertDescription>
+    Yau have succecfully added a component in the database.
+  </AlertDescription>
+</Alert> : ''}
+
+<div className="min-h-full flex flex-col justify-center items-center py-12 sm:px-6 lg:px-8">
+<FormCard handleSubmit={handleSubmit} setCode={setCode} setDescription={setDescription} setComponent={setComponent} />
+</div>
+
+      {/* <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="text-center text-2xl font-bold">Sign up</div>
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
@@ -114,7 +129,7 @@ function CreateComponent() {
 
           </div>
         </div>
-      </div>
+      </div> */}
 </>
   )
 }
