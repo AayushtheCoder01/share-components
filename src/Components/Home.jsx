@@ -36,7 +36,7 @@ function Home() {
     <Button onClick={() => (navigate('/home/add-component')) }>Add Components</Button>
     </div>
     
-    <div className='p-2 mx-10'>
+    <div className='p-2 mx-10'>0
       <Component/>
     </div>
     </>
