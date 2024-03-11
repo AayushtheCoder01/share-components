@@ -34,7 +34,7 @@ function Signup() {
 
   const handleGoogle = async (e) => {
     e.preventDefault()
-    account.createOAuth2Session('google', 'https://share-components.vercel.app', 'https://share-components.vercel.app/login');
+    account.createOAuth2Session('google', 'https://share-components.vercel.app/home', "https://share-components.vercel.app/signup");
   }
   return (
     <>
