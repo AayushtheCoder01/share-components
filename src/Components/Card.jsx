@@ -24,7 +24,7 @@ function Card({data}) {
 <div className="w-12/12 mb-5 h-auto">
   <div className="w-12/12 h-auto">
     <div className="min-w-[350px] h-auto mx-auto bg-white rounded-md overflow-hidden shadow-md m-0">
-      <div className="flex items-center justify-center bg-gray-200 h-48">
+      <div className="flex p-2 items-center justify-center bg-gray-200 h-48">
         {parsedHtml}
       </div>
       <div className="p-4">

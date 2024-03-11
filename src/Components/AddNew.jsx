@@ -35,12 +35,21 @@ function CreateComponent() {
   }
   return (
     <>
-    {uploadDone? <Alert>
-  <AlertTitle><IoMdCheckmarkCircleOutline />Congratulations</AlertTitle>
-  <AlertDescription>
-    Yau have succecfully added a component in the database.
-  </AlertDescription>
-</Alert> : ''}
+{uploadDone? 
+<div className='flex w-full justify-center items-center '>
+<div class="flex w-full max-w-md overflow-hidden m-5 mt-20 bg-white rounded-lg shadow-md dark:bg-gray-800">
+    <div class="flex items-center justify-center w-12 bg-green-500">
+    <IoMdCheckmarkCircleOutline color='white' size='30px'/>
+    </div>
+
+    <div class="px-4 py-2 -mx-3">
+        <div class="mx-3">
+            <span class="font-semibold text-blue-500 dark:text-blue-400">Success</span>
+            <p class="text-sm text-gray-600 dark:text-gray-200">You have successfully created a document in database.</p>
+        </div>
+    </div>
+</div> 
+</div>: ''}
 
 <div className="min-h-full flex flex-col justify-center items-center py-12 sm:px-6 lg:px-8">
 <FormCard handleSubmit={handleSubmit} setCode={setCode} setDescription={setDescription} setComponent={setComponent} />

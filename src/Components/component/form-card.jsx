@@ -7,10 +7,13 @@ import { Input } from "../ui/input"
 import { Textarea } from "../ui/textarea"
 import { Button } from "../ui/button"
 import { Label } from "../ui/label"
+import { useNavigate } from "react-router-dom"
 
 export default function FormCard({handleSubmit, setCode, setComponent, setDescription}) {
+  const navigate = useNavigate()
   return (
-    (<Card className="w-full max-w-lg">
+    (
+    <Card className="w-full max-w-lg">
       <form onSubmit={handleSubmit} className="grid gap-4 p-6">
         <CardHeader className="p-0">
           <div className="flex items-center space-x-4">
@@ -21,13 +24,14 @@ export default function FormCard({handleSubmit, setCode, setComponent, setDescri
         <CardContent className="space-y-4">
           <div className="grid gap-1.5">
             <Label htmlFor="title">component</Label>
-            <Input onChange={(e) => {
+            <Input required onChange={(e) => {
                 setComponent(e.target.value)
               }} id="title" placeholder="Header, Footer, Navbar" type="text" />
           </div>
           <div className="grid gap-1.5">
             <Label htmlFor="code" >Code</Label>
             <Textarea
+            required
               onChange={(e) => {
                 setCode(e.target.value)
               }}
@@ -38,6 +42,7 @@ export default function FormCard({handleSubmit, setCode, setComponent, setDescri
           <div className="grid gap-1.5">
             <Label htmlFor="description">Description</Label>
             <Textarea
+            required
             onChange={(e) => {
               setDescription(e.target.value)
             }}
@@ -47,6 +52,7 @@ export default function FormCard({handleSubmit, setCode, setComponent, setDescri
           </div>
         </CardContent>
         <CardFooter>
+          <Button className='mr-5 text-black bg-gray-100' onClick={()=>navigate('/home')}>Cancel</Button>
           <Button type="submit">Submit</Button>
         </CardFooter>
       </form>

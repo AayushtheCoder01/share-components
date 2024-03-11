@@ -5,7 +5,8 @@ import CreateComponent from './AddNew'
 import { useNavigate } from 'react-router-dom'
 import Component from './Component'
 import { Button } from './ui/button'
-import { Alert, AlertDescription, AlertTitle } from "../Components/ui/alert"
+import { NewHeader } from './component/new-header'
+import { data } from 'autoprefixer'
 
 
 function Home() {
@@ -32,7 +33,7 @@ function Home() {
   }, [])
   return (
     <>
-    <Header data = {userData}/>
+    <NewHeader data={userData}/>
 
     <div className='flex h-10 m-1 mt-5 w-full justify-center'>
     <Button onClick={() => (navigate('/home/add-component')) }>Add Components</Button>
