@@ -7,10 +7,12 @@ import { Button } from './ui/button';
  
 
 function Codes() {
-  const {id} = useParams()
+  const {id, collection} = useParams()
   const [code, setCode] = useState()
+
+
   const getData = async() => {
-    const promise = databases.getDocument('65e8b719ab2350ba6fb4', '65e8b7272cd65c037a79', id);
+    const promise = databases.getDocument('65e8b719ab2350ba6fb4', collection, id);
 
       promise.then(function (response) {
           console.log(response); // Success

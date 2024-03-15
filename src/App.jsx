@@ -8,6 +8,7 @@ import Signup from './Components/Signup'
 import Home from './Components/Home'
 import CreateComponent from './Components/AddNew';
 import Codes from './Components/Codes';
+import UserComponents from './Components/UserComponents';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -20,8 +21,9 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/home' element={<Home/>}/>
-        <Route path='/components/codes/:id' element={<Codes/>}/>
+        <Route path='/components/codes/:collection/:id' element={<Codes/>}/>
         <Route path='/home/add-component' element={<CreateComponent/>}/>
+        <Route path='/home/your-components' element={<UserComponents/>}/>
       </Routes>
     </BrowserRouter>
 

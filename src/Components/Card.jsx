@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import parse from 'html-react-parser';
-function Card({data}) {
+function Card({data, collectionId}) {
   const {component, code, description, $id} = data
 
   const htmlString = code;
@@ -31,7 +31,7 @@ function Card({data}) {
         <h2 className="text-xl font-semibold mb-2">{component}</h2>
         <p className="text-gray-700">{description}</p>
         <div className="mt-4">
-          <Link to={`/components/codes/${$id}`} target='_blank' className="text-blue-500 hover:underline">
+          <Link to={`/components/codes/${collectionId}/${$id}`} target='_blank' className="text-blue-500 hover:underline">
             Get Code
           </Link>
         </div>

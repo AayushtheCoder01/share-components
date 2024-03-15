@@ -35,7 +35,7 @@ function Home() {
     <>
     <NewHeader data={userData}/>
 
-    <div className='flex h-10 m-1 mt-5 w-full justify-center'>
+    <div className='flex h-auto  m-1 mt-5 w-full justify-center'>
     <Button onClick={() => (navigate('/home/add-component')) }>Add Components</Button>
     </div>
     
