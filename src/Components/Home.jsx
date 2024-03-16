@@ -14,15 +14,18 @@ function Home() {
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
 
-  const getData = async (dispatch, setLoading) => {
-  try {
-    const response = await account.get();
-    console.log(response.name)
-    setLoading(false);
-  } catch (error) {
-    await account.updatePrefs('guest');
+  const getData = async() => {
+    const promise = account.get()
+    promise.then(
+      function(response) {
+        dispatch(login(response))
+        setLoading(false)
+      },
+      function (error) {
+        account.updatePrefs('guest');
+      }
+    )
   }
-};
   getData()
   return (
     <>
