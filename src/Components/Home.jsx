@@ -7,24 +7,24 @@ import Component from './Component'
 import { Button } from './ui/button'
 import { NewHeader } from './component/new-header'
 import { data } from 'autoprefixer'
-
+import {useDispatch, useSelector } from 'react-redux'
+import { login } from '@/store/createSlice'
 
 function Home() {
   const navigate = useNavigate()
-  const [userData, setUserData] = useState()
   const [loading, setLoading] = useState(true)
+  const dispatch = useDispatch()
+  // const selector = useSelector()
 
   const getData = async() => {
     const promise = account.get()
     promise.then(
       function(response) {
-        setUserData(response)
+        dispatch(login(response))
         setLoading(false)
-        console.log(response)
       },
       function (error) {
         console.log(error)
-        navigate('/login')
       }
     )
   }
@@ -33,7 +33,7 @@ function Home() {
   }, [])
   return (
     <>
-    <NewHeader data={userData}/>
+    <NewHeader/>
 
     <div className='flex h-auto  m-1 mt-5 w-full justify-center'>
     <Button onClick={() => (navigate('/home/add-component')) }>Add Components</Button>

@@ -6,10 +6,18 @@ import { Link } from "react-router-dom";
 import { Button } from "../ui/button"
 import { account } from "../../appwrite/appwriteConfig";
 import { useNavigate } from "react-router-dom";
+import {useDispatch, useSelector } from 'react-redux'
+import { logout } from '@/store/createSlice'
 
-export function NewHeader({data = {name: ''}}) {
-  const {name} = data;
+
+export function NewHeader() {
+  // const {name} = data;
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const userData = useSelector((state) => state.user)
+  const isLoggedIn = useSelector((state) => state.isLoggedIn)
+
+
   return (
     (<header className="flex px-5 items-center h-16 bg-gray-100 px-4 w-full shrink-0">
       <Link className="mr-6" href="#">
@@ -20,11 +28,19 @@ export function NewHeader({data = {name: ''}}) {
         Home
       </Link>
       <div className="flex items-center space-x-4 ml-auto px-4">
-        <div className="text-lg font-semibold text-gray-500 border border-green-300 bg-green-100 p-1 px-3 rounded-3xl">{name}</div>
+        {userData.name? <div className="text-lg font-semibold text-gray-500 border border-green-300 bg-green-100 p-1 px-3 rounded-3xl">{userData.name}</div> : ""}
+
+        {isLoggedIn? 
         <Button onClick={() => {
         account.deleteSessions()
+        dispatch(logout())
         navigate('/login')
-    }}>Logout</Button>
+    }}>Logout</Button> : 
+    
+    <Button onClick={() => {
+      navigate('/login')
+  }}>Login</Button>}
+        
       </div>
     </header>)
   );

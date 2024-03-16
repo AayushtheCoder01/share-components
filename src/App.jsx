@@ -9,6 +9,7 @@ import Home from './Components/Home'
 import CreateComponent from './Components/AddNew';
 import Codes from './Components/Codes';
 import UserComponents from './Components/UserComponents';
+import { NewHeader } from './Components/component/new-header';
 
 function App() {
   const [count, setCount] = useState(0)
