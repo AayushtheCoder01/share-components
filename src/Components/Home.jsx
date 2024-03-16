@@ -8,6 +8,7 @@ import { NewHeader } from './component/new-header'
 import { data } from 'autoprefixer'
 import {useDispatch, useSelector } from 'react-redux'
 import { login } from '@/store/createSlice'
+import { User } from 'lucide-react'
 
 function Home() {
   const [loading, setLoading] = useState(true)
@@ -16,21 +17,10 @@ function Home() {
   const getData = async (dispatch, setLoading) => {
   try {
     const response = await account.get();
-    // Check if the user is already a guest
-    if (response.prefs === 'guest') {
-      // If the user is already a guest, update the loading state and return
-      setLoading(false);
-      return;
-    }
-    // Update user's role to guest
-    await account.updatePrefs('guest');
-    // Dispatch the login action with the updated user data
-    dispatch(login(response));
-    // Update the loading state
+    console.log(response.name)
     setLoading(false);
   } catch (error) {
-    console.error('Error fetching user data:', error);
-    // Handle error
+    await account.updatePrefs('guest');
   }
 };
   getData()
