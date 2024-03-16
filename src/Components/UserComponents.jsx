@@ -25,6 +25,7 @@ function UserComponents() {
   const isLoggedIn = useSelector((state) => state.isLoggedIn)
   const navigate = useNavigate()
     useEffect(()=> {
+
         async function createUserComponentsArr() {
           const userId = await account.get()
           const createDocument = await databases.createDocument(
@@ -38,10 +39,7 @@ function UserComponents() {
             }
           )
         }
-        if(isLoggedIn===true) {
           createUserComponentsArr()
-          navigate('/login')
-        }
           setLoading(false)
     }, [])
 
@@ -64,10 +62,7 @@ function UserComponents() {
           }
         )
       }
-      if(isLoggedIn===true) {
-        getDocument()
-        navigate('/login')
-      }
+      getDocument()
     },[])
 
 

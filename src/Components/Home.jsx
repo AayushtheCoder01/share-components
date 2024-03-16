@@ -13,7 +13,27 @@ function Home() {
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
 
-  
+  const getData = async (dispatch, setLoading) => {
+  try {
+    const response = await account.get();
+    // Check if the user is already a guest
+    if (response.prefs === 'guest') {
+      // If the user is already a guest, update the loading state and return
+      setLoading(false);
+      return;
+    }
+    // Update user's role to guest
+    await account.updatePrefs('guest');
+    // Dispatch the login action with the updated user data
+    dispatch(login(response));
+    // Update the loading state
+    setLoading(false);
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    // Handle error
+  }
+};
+  getData()
   return (
     <>
     <NewHeader/>
