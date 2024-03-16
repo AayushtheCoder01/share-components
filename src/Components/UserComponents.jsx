@@ -14,13 +14,14 @@ function UserComponents() {
   const [appwriteId, setAppwriteId] = useState()
   const [userData, setUserData] = useState([])
 
-  const userComponentsCollectionID= ['new']
+  const userComponentsCollectionID= ['']
 
   const [code, setCode] = useState("")
   const [component, setComponent] = useState("")
   const [description, setDescription] = useState("")
 
   const [userComponents, setUserComponents] = useState([])
+
     useEffect(()=> {
         async function createUserComponentsArr() {
           const userId = await account.get()
@@ -32,6 +33,7 @@ function UserComponents() {
           )
         }
           createUserComponentsArr()
+          setLoading(false)
     }, [])
 
     useEffect(()=> {
@@ -43,7 +45,9 @@ function UserComponents() {
           userId.$id,
         ).then(
           function(response) {
-            setUserData(response.userComponentsCollectionID)
+            if(response.length>0){
+              setUserData(response.userComponentsCollectionID)
+            }
             setLoading(false)
           },
           function(error) {
