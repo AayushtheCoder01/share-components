@@ -20,7 +20,7 @@ function Home() {
         dispatch(login(response))
       },
       function (error) {
-        console.log(error)
+        account.updatePrefs('guest');
       }
     )
   }
