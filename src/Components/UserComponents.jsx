@@ -64,7 +64,10 @@ function UserComponents() {
           }
         )
       }
-      getDocument()
+      if(isLoggedIn===true) {
+        getDocument()
+        navigate('/login')
+      }
     },[])
 
 
