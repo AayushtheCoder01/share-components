@@ -29,7 +29,9 @@ function Home() {
     )
   }
   useEffect(() => {
-    getData()
+    if(account.get()) {
+      getData()
+    }
   }, [])
   return (
     <>
