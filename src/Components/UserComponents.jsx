@@ -7,7 +7,8 @@ import { Button } from './ui/button'
 import FormCard from './component/form-card'
 import {v4 as uuidv4} from 'uuid'
 import DataLoader from './DataLoader'
-
+import { UseSelector, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 function UserComponents() {
   const [loading, setLoading] = useState(true)
   const [addComponent, setAddComponents] = useState(false)
@@ -21,8 +22,12 @@ function UserComponents() {
   const [description, setDescription] = useState("")
 
   const [userComponents, setUserComponents] = useState([])
-
+  const isLoggedIn = useSelector((state) => state.isLoggedIn)
+  const navigate = useNavigate()
     useEffect(()=> {
+      if(!isLoggedIn) {
+        navigate('/login')
+      }
         async function createUserComponentsArr() {
           const userId = await account.get()
           const createDocument = await databases.createDocument(
