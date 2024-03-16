@@ -14,7 +14,7 @@ function UserComponents() {
   const [appwriteId, setAppwriteId] = useState()
   const [userData, setUserData] = useState([])
 
-  const userComponentsCollectionID= ['']
+  const userComponentsCollectionID= null
 
   const [code, setCode] = useState("")
   const [component, setComponent] = useState("")
@@ -45,7 +45,7 @@ function UserComponents() {
           userId.$id,
         ).then(
           function(response) {
-            if(response.length!==0){
+            if(response){
               setUserData(response.userComponentsCollectionID)
             }
             setLoading(false)
