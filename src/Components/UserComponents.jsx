@@ -45,7 +45,7 @@ function UserComponents() {
           userId.$id,
         ).then(
           function(response) {
-            if(response.length>0){
+            if(response.length!==0){
               setUserData(response.userComponentsCollectionID)
             }
             setLoading(false)
