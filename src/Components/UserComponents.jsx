@@ -38,7 +38,10 @@ function UserComponents() {
             }
           )
         }
+        if(isLoggedIn===true) {
           createUserComponentsArr()
+          navigate('/login')
+        }
           setLoading(false)
     }, [])
 
