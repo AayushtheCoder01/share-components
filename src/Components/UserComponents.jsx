@@ -21,18 +21,18 @@ function UserComponents() {
   const [description, setDescription] = useState("")
 
   const [userComponents, setUserComponents] = useState([])
-    // useEffect(()=> {
-    //     async function createUserComponentsArr() {
-    //       const userId = await account.get()
-    //       const createDocument = await databases.createDocument(
-    //         '65e8b719ab2350ba6fb4',
-    //         '65f025095099df66de90',
-    //         userId.$id,
-    //         {userComponentsCollectionID}
-    //       )
-    //     }
-    //       createUserComponentsArr()
-    // }, [])
+    useEffect(()=> {
+        async function createUserComponentsArr() {
+          const userId = await account.get()
+          const createDocument = await databases.createDocument(
+            '65e8b719ab2350ba6fb4',
+            '65f025095099df66de90',
+            userId.$id,
+            {userComponentsCollectionID}
+          )
+        }
+          createUserComponentsArr()
+    }, [])
 
     useEffect(()=> {
       async function getDocument() {
