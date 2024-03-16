@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { account } from '../appwrite/appwriteConfig'
-
+import {useDispatch, useSelector } from 'react-redux'
+import { login } from '@/store/createSlice'
 
 function Login() {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   let [userDetails, setUserDetails] = useState({
     email: "",
     password: "",
@@ -18,6 +20,7 @@ function Login() {
     promise.then(
       function(response) {
         console.log(response.$id)
+        getData()
         navigate('/home')
       }, 
       function(response) {
@@ -26,6 +29,19 @@ function Login() {
     )
 
   }
+  const getData = async() => {
+    const promise = account.get()
+    promise.then(
+      function(response) {
+        dispatch(login(response))
+        setLoading(false)
+      },
+      function (error) {
+        console.log(error)
+      }
+    )
+  }
+
 
 
 

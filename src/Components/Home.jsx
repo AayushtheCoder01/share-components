@@ -16,23 +16,7 @@ function Home() {
   const dispatch = useDispatch()
   // const selector = useSelector()
 
-  const getData = async() => {
-    const promise = account.get()
-    promise.then(
-      function(response) {
-        dispatch(login(response))
-        setLoading(false)
-      },
-      function (error) {
-        console.log(error)
-      }
-    )
-  }
-  useEffect(() => {
-    if(account.get()) {
-      getData()
-    }
-  }, [])
+  
   return (
     <>
     <NewHeader/>
