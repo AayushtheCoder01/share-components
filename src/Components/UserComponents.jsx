@@ -7,7 +7,7 @@ import { Button } from './ui/button'
 import FormCard from './component/form-card'
 import {v4 as uuidv4} from 'uuid'
 import DataLoader from './DataLoader'
-import { UseSelector, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 function UserComponents() {
   const [loading, setLoading] = useState(true)
