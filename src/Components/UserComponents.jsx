@@ -6,10 +6,10 @@ import SideNavbar from './SideNavbar'
 import { Button } from './ui/button'
 import FormCard from './component/form-card'
 import {v4 as uuidv4} from 'uuid'
-import Card from './Card'
+import DataLoader from './DataLoader'
 
 function UserComponents() {
-
+  const [loading, setLoading] = useState(true)
   const [addComponent, setAddComponents] = useState(false)
   const [appwriteId, setAppwriteId] = useState()
   const [userData, setUserData] = useState([])
@@ -37,14 +37,14 @@ function UserComponents() {
     useEffect(()=> {
       async function getDocument() {
         const userId = await account.get()
-        const promise= await databases.getDocument(
+        const promise = await databases.getDocument(
           '65e8b719ab2350ba6fb4',
           '65f025095099df66de90',
           userId.$id,
         ).then(
           function(response) {
             setUserData(response.userComponentsCollectionID)
-            // showData()
+            setLoading(false)
           },
           function(error) {
             console.log(error)
@@ -54,25 +54,12 @@ function UserComponents() {
       getDocument()
     },[])
 
-    const showData = async () => {
-       userData.map(data => {
-        const promise = databases.getDocument('65e8b719ab2350ba6fb4','65f305269a55fcffc6eb', data)
-         promise.then(
-          function(response) {
-            // userComponents.push(response)
-            console.log(response)
-            setUserComponents([...userComponents, response])
-            console.log(userComponents)
-          }
-        )
-        })
-    }
-    // showData()
+
 
     const handleSubmit = async (e) => {
       e.preventDefault()
       let documentId = uuidv4()
-    const promise = databases.createDocument("65e8b719ab2350ba6fb4", "65f305269a55fcffc6eb", documentId, {
+      const promise = await databases.createDocument("65e8b719ab2350ba6fb4", "65f305269a55fcffc6eb", documentId, {
       code,
       component,
       description
@@ -89,13 +76,13 @@ function UserComponents() {
 
     const updateDocument = async (id) => {
       const userId = await account.get()
-      const newDocumentId = [...userData, id]
+      const newDocumentId = [id, ...userData]
       const promise = databases.updateDocument('65e8b719ab2350ba6fb4','65f025095099df66de90', userId.$id, {
         'userComponentsCollectionID' : newDocumentId
       }).then(
         function(response) {
           console.log('done')
-          userData.push(id)
+          userData.shift(id)
         },
         function(error) {
           console.log('updateDocumentError' ,error)
@@ -118,8 +105,8 @@ function UserComponents() {
       <SideNavbar/>
 
       <div className="flex flex-col flex-wrap w-full md:pl-20 md:w-9/12 overflow-y-auto">
-        {userComponents.map(component => (
-          <Card data={component} collectionId={'65f305269a55fcffc6ebc6eb'}/>
+        {loading? <p className='text-center'>Loading</p>: userData.map(id => (
+          <DataLoader key={id} userData={id} collectionId={'65f305269a55fcffc6eb'}/>
         ))}
       </div>
     </div>

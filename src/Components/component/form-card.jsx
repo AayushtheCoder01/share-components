@@ -14,7 +14,7 @@ export default function FormCard({handleSubmit, setCode, setComponent, setDescri
   return (
     (
     <Card className="w-full max-w-lg">
-      <form onSubmit={handleSubmit} className="grid gap-4 p-6">
+      <form onSubmit={(e) => handleSubmit(e)} className="grid gap-4 p-6">
         <CardHeader className="p-0">
           <div className="flex items-center space-x-4">
             <h2 className="text-lg font-bold">Add Snippet</h2>
