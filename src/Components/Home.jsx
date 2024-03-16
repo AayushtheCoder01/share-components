@@ -11,22 +11,20 @@ import { login } from '@/store/createSlice'
 import { User } from 'lucide-react'
 
 function Home() {
-  const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
 
-  const getData = async() => {
-    const promise = account.get()
-    promise.then(
-      function(response) {
-        dispatch(login(response))
-        setLoading(false)
-      },
-      function (error) {
-        account.updatePrefs('guest');
-      }
-    )
-  }
-  getData()
+  // const getData = async() => {
+  //   const promise = account.get()
+  //   promise.then(
+  //     function(response) {
+  //       dispatch(login(response))
+  //     },
+  //     function (error) {
+  //       console.log(error)
+  //     }
+  //   )
+  // }
+  // getData()
   return (
     <>
     <NewHeader/>
