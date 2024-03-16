@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react'
 import Header from './Header'
 import { account } from '../appwrite/appwriteConfig'
 import CreateComponent from './AddNew'
-import { useNavigate } from 'react-router-dom'
 import Component from './Component'
 import { Button } from './ui/button'
 import { NewHeader } from './component/new-header'
@@ -11,10 +10,8 @@ import {useDispatch, useSelector } from 'react-redux'
 import { login } from '@/store/createSlice'
 
 function Home() {
-  const navigate = useNavigate()
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
-  // const selector = useSelector()
 
   
   return (
