@@ -29,7 +29,11 @@ function UserComponents() {
             '65e8b719ab2350ba6fb4',
             '65f025095099df66de90',
             userId.$id,
-            {userComponentsCollectionID}
+            {
+              userComponentsCollectionID,
+              "name" : userId.name
+            
+            }
           )
         }
           createUserComponentsArr()
