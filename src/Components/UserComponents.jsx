@@ -25,9 +25,6 @@ function UserComponents() {
   const isLoggedIn = useSelector((state) => state.isLoggedIn)
   const navigate = useNavigate()
     useEffect(()=> {
-      if(!isLoggedIn) {
-        navigate('/login')
-      }
         async function createUserComponentsArr() {
           const userId = await account.get()
           const createDocument = await databases.createDocument(
