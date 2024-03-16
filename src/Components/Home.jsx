@@ -13,18 +13,18 @@ import { User } from 'lucide-react'
 function Home() {
   const dispatch = useDispatch()
 
-  // const getData = async() => {
-  //   const promise = account.get()
-  //   promise.then(
-  //     function(response) {
-  //       dispatch(login(response))
-  //     },
-  //     function (error) {
-  //       console.log(error)
-  //     }
-  //   )
-  // }
-  // getData()
+  const getData = async() => {
+    const promise = account.get()
+    promise.then(
+      function(response) {
+        dispatch(login(response))
+      },
+      function (error) {
+        console.log(error)
+      }
+    )
+  }
+  getData()
   return (
     <>
     <NewHeader/>
