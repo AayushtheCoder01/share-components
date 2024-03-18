@@ -9,6 +9,7 @@ import {v4 as uuidv4} from 'uuid'
 import DataLoader from './DataLoader'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { getDefaultConfig } from 'tailwind-merge'
 function UserComponents() {
   const [loading, setLoading] = useState(true)
   const [addComponent, setAddComponents] = useState(false)
@@ -35,7 +36,6 @@ function UserComponents() {
             {
               userComponentsCollectionID,
               "name" : userId.name
-            
             }
           )
         }
@@ -45,33 +45,31 @@ function UserComponents() {
         setLoading(false)
           
     }, [])
-
-    useEffect(()=> {
-      async function getDocument() {
-        const userId = await account.get()
-        const promise = await databases.getDocument(
-          '65e8b719ab2350ba6fb4',
-          '65f025095099df66de90',
-          userId.$id,
-        ).then(
-          function(response) {
-            if(response){
-              setUserData(response.userComponentsCollectionID)
-            }
-            setLoading(false)
-          },
-          function(error) {
-            console.log(error)
+    
+    const getDocument = async function() {
+      const userId = await account.get()
+      const promise = await databases.getDocument(
+        '65e8b719ab2350ba6fb4',
+        '65f025095099df66de90',
+        userId.$id,
+      ).then(
+        function(response) {
+          if(response){
+            setUserData(response.userComponentsCollectionID)
           }
-        )
-      }
+          setLoading(false)
+        },
+        function(error) {
+          console.log(error)
+        }
+      )
+    }
+    // waiting time to get data from redux toolkit store.
+    setTimeout(() => {
       if(isLoggedIn === true) {
-        getDocument()
-      }
-      
-    },[])
-
-
+      getDocument()
+    }
+    }, 500);
 
     const handleSubmit = async (e) => {
       e.preventDefault()
@@ -83,7 +81,6 @@ function UserComponents() {
     }).then(
       function(response) {
         updateDocument(documentId)
-        setAddComponents(false)
       },
       function(error) {
         console.log(error)
@@ -100,6 +97,10 @@ function UserComponents() {
         function(response) {
           console.log('done')
           userData.shift(id)
+        setAddComponents(false)
+
+          // navigate('/your-components')
+          // window.location.reload()
         },
         function(error) {
           console.log('updateDocumentError' ,error)

@@ -27,7 +27,7 @@ function App() {
         <Route path='/home' element={<Home/>}/>
         <Route path='/components/codes/:collection/:id' element={<Codes/>}/>
         <Route path='/home/add-component' element={<CreateComponent/>}/>
-        <Route path='/home/your-components' element={<UserComponents/>}/>
+        <Route path='/your-components' element={<UserComponents/>}/>
       </Routes>
     </BrowserRouter>
 
