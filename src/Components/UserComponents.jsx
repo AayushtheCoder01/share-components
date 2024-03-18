@@ -39,8 +39,11 @@ function UserComponents() {
             }
           )
         }
+        if(isLoggedIn===true) {
           createUserComponentsArr()
-          setLoading(false)
+        }
+        setLoading(false)
+          
     }, [])
 
     useEffect(()=> {
@@ -62,7 +65,10 @@ function UserComponents() {
           }
         )
       }
-      getDocument()
+      if(isLoggedIn === true) {
+        getDocument()
+      }
+      
     },[])
 
 
@@ -106,7 +112,10 @@ function UserComponents() {
       <NewHeader/>
     </div>
 
-    <div className='flex justify-center m-1 mt-5'><Button onClick={() => setAddComponents(!addComponent)}>Add component</Button></div>
+    <div className='flex justify-center m-1 mt-5'><Button onClick={() => {
+      if(isLoggedIn===true) setAddComponents(!addComponent)
+      if(isLoggedIn===false) navigate('/login')
+    }}>Add component</Button></div>
     
     <div className='flex w-screen justify-center h-auto'>
       {addComponent? <FormCard handleSubmit={handleSubmit} setCode={setCode} setDescription={setDescription} setComponent={setComponent}/> : ''}

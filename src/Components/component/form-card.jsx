@@ -14,7 +14,23 @@ export default function FormCard({handleSubmit, setCode, setComponent, setDescri
   return (
     (
     <Card className="w-full max-w-lg">
-      <form onSubmit={(e) => handleSubmit(e)} className="grid gap-4 p-6">
+      <div className="flex w-full justify-center  p-1  mt-4">
+      <div class="flex w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+    <div class="flex items-center justify-center w-16 bg-yellow-500">
+        <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z" />
+        </svg>
+    </div>
+
+    <div class="px-4 py-1 -mx-3">
+        <div class="mx-3">
+            <span class="font-semibold text-blue-500 dark:text-blue-400">Info</span>
+            <p class="text-sm text-gray-600 dark:text-gray-200">Please remove all the variable and loops from the component! Upload only raw jsx.</p>
+        </div>
+    </div>
+</div>
+      </div>
+      <form onSubmit={(e) => handleSubmit(e)} className="grid gap-2 p-6">
         <CardHeader className="p-0">
           <div className="flex items-center space-x-4">
             <h2 className="text-lg font-bold">Add Snippet</h2>

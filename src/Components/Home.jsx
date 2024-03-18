@@ -1,36 +1,30 @@
 import React, {useEffect, useState} from 'react'
-import Header from './Header'
 import { account } from '../appwrite/appwriteConfig'
-import CreateComponent from './AddNew'
 import Component from './Component'
 import { Button } from './ui/button'
 import { NewHeader } from './component/new-header'
-import { data } from 'autoprefixer'
 import {useDispatch, useSelector } from 'react-redux'
-import { login } from '@/store/createSlice'
-import { User } from 'lucide-react'
+import { fetchUser, login } from '@/store/createSlice'
+import { useNavigate } from 'react-router-dom'
 
 function Home() {
   const dispatch = useDispatch()
+  const {isLoggedIn} =useSelector((state) => state)
+  const navigate = useNavigate()
 
-  const getData = async() => {
-    const promise = account.get()
-    promise.then(
-      function(response) {
-        dispatch(login(response))
-      },
-      function (error) {
-        account.updatePrefs('guest');
-      }
-    )
-  }
-  getData()
   return (
     <>
     <NewHeader/>
 
     <div className='flex h-auto  m-1 mt-5 w-full justify-center'>
-    <Button onClick={() => (navigate('/home/add-component')) }>Add Components</Button>
+    <Button onClick={() => {
+      if(isLoggedIn===true) {
+      navigate('/home/add-component')
+      }
+      if(isLoggedIn===false) {
+      navigate('/login')
+      }
+    } }>Add Components</Button>
     </div>
     
     <div className='p-2 mx-10'>

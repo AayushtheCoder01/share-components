@@ -1,19 +1,22 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import React from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import {BrowserRouter, Routes, Route, useNavigate} from 'react-router-dom'
 import Login from './Components/Login'
 import Signup from './Components/Signup'
 import Home from './Components/Home'
 import CreateComponent from './Components/AddNew';
 import Codes from './Components/Codes';
 import UserComponents from './Components/UserComponents';
-import { NewHeader } from './Components/component/new-header';
-
+import { useDispatch } from 'react-redux';
+import { fetchUser } from './store/createSlice';
 function App() {
-  const [count, setCount] = useState(0)
 
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchUser())
+  }, [])
   return (
     <>
     <BrowserRouter>
