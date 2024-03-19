@@ -101,9 +101,9 @@ function UserComponents() {
         function(response) {
           console.log('done')
           userData.shift(id)
-        setAddComponents(false)
+          setAddComponents(false)
 
-          // navigate('/your-components')
+          navigate('/your-components')
           // window.location.reload()
         },
         function(error) {

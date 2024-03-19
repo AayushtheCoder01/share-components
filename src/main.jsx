@@ -19,6 +19,10 @@ const router = createBrowserRouter([
     element: <Layout/>,
     children: [
       {
+        path: '/home/add-component',
+        element: <CreateComponent/>,
+      },
+      {
         path: '',
         element: <Home/>
       },
@@ -32,20 +36,21 @@ const router = createBrowserRouter([
       },
       {
         path: 'home',
-        element: <Home/>
+        element: <Home/>,
       },
       {
         path: 'components/codes/:collection/:id',
         element: <Codes/>
       },
       {
-        path: 'home/add-component',
-        element: <CreateComponent/>
-      },
-      {
         path: 'your-components',
         element: <UserComponents/>,
         loader : loaderFunction
+      },
+      // Catch-all route for showing 404 error page
+      {
+        path: '*',
+        element: <p className='text-center m-1 mt-20'>Page not Found!</p>
       }
     ],
   }
