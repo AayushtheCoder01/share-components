@@ -19,7 +19,7 @@ function App() {
   }, [])
   return (
     <>
-    <BrowserRouter>
+    {/* <BrowserRouter>
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
@@ -29,7 +29,7 @@ function App() {
         <Route path='/home/add-component' element={<CreateComponent/>}/>
         <Route path='/your-components' element={<UserComponents/>}/>
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter> */}
 
      </>
   )

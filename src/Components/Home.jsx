@@ -14,7 +14,6 @@ function Home() {
 
   return (
     <>
-    <NewHeader/>
 
     <div className='flex h-auto  m-1 mt-5 w-full justify-center'>
     <Button onClick={() => {

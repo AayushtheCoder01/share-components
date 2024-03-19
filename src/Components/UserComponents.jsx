@@ -9,9 +9,8 @@ import {v4 as uuidv4} from 'uuid'
 import DataLoader from './DataLoader'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { getDefaultConfig } from 'tailwind-merge'
+
 function UserComponents() {
-  const [loading, setLoading] = useState(true)
   const [addComponent, setAddComponents] = useState(false)
   const [appwriteId, setAppwriteId] = useState()
   const [userData, setUserData] = useState([])
@@ -24,6 +23,10 @@ function UserComponents() {
 
   const [userComponents, setUserComponents] = useState([])
   const isLoggedIn = useSelector((state) => state.isLoggedIn)
+
+
+  const [loading, setLoading] = useState(isLoggedIn)
+
   const navigate = useNavigate()
     useEffect(()=> {
 
@@ -42,9 +45,10 @@ function UserComponents() {
         if(isLoggedIn===true) {
           createUserComponentsArr()
         }
-        setLoading(false)
+        // setLoading(false)
           
     }, [])
+
     
     const getDocument = async function() {
       const userId = await account.get()
@@ -69,7 +73,7 @@ function UserComponents() {
       if(isLoggedIn === true) {
       getDocument()
     }
-    }, 500);
+    }, 250);
 
     const handleSubmit = async (e) => {
       e.preventDefault()
@@ -107,11 +111,12 @@ function UserComponents() {
         }
       )
     }
+
   return (
     <>
-    <div className=''>
+    {/* <div className=''>
       <NewHeader/>
-    </div>
+    </div> */}
 
     <div className='flex justify-center m-1 mt-5'><Button onClick={() => {
       if(isLoggedIn===true) setAddComponents(!addComponent)
@@ -126,13 +131,19 @@ function UserComponents() {
       <SideNavbar/>
 
       <div className="flex flex-col flex-wrap w-full md:pl-20 md:w-9/12 overflow-y-auto">
-        {loading? <p className='text-center'>Loading</p>: userData.map(id => (
-          <DataLoader key={id} userData={id} collectionId={'65f305269a55fcffc6eb'}/>
-        ))}
+        {loading? <p className='text-center'>Loading...</p>: isLoggedIn? userData.map(id => (
+          <DataLoader key={id} userData={id} collectionId={'65f305269a55fcffc6eb'}/> 
+        )) : <p className='text-center'>Please Login!</p>}
       </div>
     </div>
     </>
   )
+  
 }
 
 export default UserComponents
+
+export const loaderFunction = async () => {
+  console.log('loader activated!')
+  return null
+}
