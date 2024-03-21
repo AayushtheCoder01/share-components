@@ -28,6 +28,8 @@ function UserComponents() {
   const [loading, setLoading] = useState(isLoggedIn)
 
   const navigate = useNavigate()
+
+
     useEffect(()=> {
 
         async function createUserComponentsArr() {
@@ -45,12 +47,12 @@ function UserComponents() {
         if(isLoggedIn===true) {
           createUserComponentsArr()
         }
-        // setLoading(false)
+        setLoading(false)
           
     }, [])
 
-    
-    const getDocument = async function() {
+    useEffect(() => {
+     async function getDocument() {
       const userId = await account.get()
       const promise = await databases.getDocument(
         '65e8b719ab2350ba6fb4',
@@ -58,22 +60,20 @@ function UserComponents() {
         userId.$id,
       ).then(
         function(response) {
-          if(response){
-            setUserData(response.userComponentsCollectionID)
-          }
+          setUserData(response.userComponentsCollectionID)
           setLoading(false)
         },
         function(error) {
           console.log(error)
         }
       )
-    }
+     }
+     getDocument()
+
+    }, [])
+    // getDocument()
     // waiting time to get data from redux toolkit store.
-    setTimeout(() => {
-      if(isLoggedIn === true) {
-      getDocument()
-    }
-    }, 250);
+
 
     const handleSubmit = async (e) => {
       e.preventDefault()
