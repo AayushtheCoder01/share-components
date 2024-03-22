@@ -7,7 +7,7 @@ function SideNavbar() {
   const {user} = useSelector((state)=>state)
   return (
     <>
-    <aside className="rounded-xl hidden md:flex flex flex-col w-64 h-screen px-4 py-8 overflow-y-auto bg-black text-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
+    <div className="rounded-xl hidden md:flex flex flex-col w-64 h-screen px-4 py-8 overflow-y-auto bg-black text-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
     <a href="#" className="mx-auto">
         {/* <img class="w-auto h-6 sm:h-7" src="https://merakiui.com/images/full-logo.svg" alt=""> */}
     </a>
@@ -45,7 +45,7 @@ function SideNavbar() {
         </a>
 
     </div>
-</aside>
+</div>
     </>
   )
 }

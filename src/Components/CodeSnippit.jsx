@@ -8,7 +8,7 @@ function CodeSnippit({code}) {
   return (
     <>
     <SyntaxHighlighter language="javascript" style={atomOneDark} customStyle={{
-      padding: "25px"
+      padding: "20px"
     }} wrapLongLines={true}>
       {code}
     </SyntaxHighlighter>

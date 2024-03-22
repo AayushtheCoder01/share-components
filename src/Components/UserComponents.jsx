@@ -25,15 +25,32 @@ function UserComponents() {
   const isLoggedIn = useSelector((state) => state.isLoggedIn)
 
 
-  const [loading, setLoading] = useState(isLoggedIn)
+  const [loading, setLoading] = useState(true)
 
   const navigate = useNavigate()
 
 
     useEffect(()=> {
+      async function deployer() {
+        const userId = await account.get()
+        try {
+          const promise = await databases.getDocument(
+            '65e8b719ab2350ba6fb4',
+            '65f025095099df66de90',
+             userId.$id,
+      ).then(
+        function(response) {
+          setUserData(response.userComponentsCollectionID)
+          setLoading(false)
+        }
+      )
+        } catch (error) {
+          createUserComponentsArr(userId)
+        }
+      }
+      deployer()
 
-        async function createUserComponentsArr() {
-          const userId = await account.get()
+        async function createUserComponentsArr(userId) {
           const createDocument = await databases.createDocument(
             '65e8b719ab2350ba6fb4',
             '65f025095099df66de90',
@@ -46,33 +63,10 @@ function UserComponents() {
         }
         if(isLoggedIn===true) {
           createUserComponentsArr()
+          setLoading(false)
         }
-        setLoading(false)
           
     }, [])
-
-    useEffect(() => {
-     async function getDocument() {
-      const userId = await account.get()
-      const promise = await databases.getDocument(
-        '65e8b719ab2350ba6fb4',
-        '65f025095099df66de90',
-        userId.$id,
-      ).then(
-        function(response) {
-          setUserData(response.userComponentsCollectionID)
-          setLoading(false)
-        },
-        function(error) {
-          console.log(error)
-        }
-      )
-     }
-     getDocument()
-
-    }, [])
-    // getDocument()
-    // waiting time to get data from redux toolkit store.
 
 
     const handleSubmit = async (e) => {
