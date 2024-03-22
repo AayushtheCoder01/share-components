@@ -4,27 +4,35 @@ import Card from './Card'
 import { Functions } from 'appwrite'
 import SideNavbar from './SideNavbar'
 import './components.css'
-function Component() {
-  // this is shome component.
-    const [data, setData] = useState([])
-    const [loadind, setLoading] = useState(true)
-    useEffect(() => {
-      const promise = databases.listDocuments("65e8b719ab2350ba6fb4", "65e8b7272cd65c037a79")
+import { useQuery } from '@tanstack/react-query'
 
-      promise.then(
-        function(response) {
-            setData(response.documents)
-            setLoading(false)
-        },
-        function(error) {
-            console.log(error)
-        }
-      )
+function Component() {
+    const {isLoading, data} = useQuery({
+      queryKey:["components"] , queryFn: getData, staleTime: 10000, refetchOnWindowFocus: false,
+    })
+
+    async function getData() {
+      const data = await databases.listDocuments("65e8b719ab2350ba6fb4", "65e8b7272cd65c037a79")
+  
+      return data.documents
+    }
+    useEffect(() => {
+      // const promise = databases.listDocuments("65e8b719ab2350ba6fb4", "65e8b7272cd65c037a79")
+
+      // promise.then(9
+      //   function(response) {
+      //       setData(response.documents)
+      //       setLoading(false)
+      //   },
+      //   function(error) {
+      //       console.log(error)
+      //   }
+      // )
     }, [])
     
   return (
     <>
-    {loadind? <p className='text-center mt-20'>Loading...</p> :<div className='flex mt-10 w-full overflow-hidden'>
+    {isLoading? <p className='text-center mt-20'>Loading...</p> :<div className='flex mt-10 w-full overflow-hidden'>
       <div className=''>
         <SideNavbar></SideNavbar>
       </div>

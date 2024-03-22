@@ -7,7 +7,7 @@ function Preview({code}) {
     const parsedHtml = parse(codeSnippet)
 
   return (
-    <div className='w-[70vw] flex justify-center h-auto w-auto'>{parsedHtml}</div>
+    <div className='w-auto flex justify-center h-auto '>{parsedHtml}</div>
   )
 }
 

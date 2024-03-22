@@ -56,7 +56,7 @@ export function NewHeader() {
           <li className="my-1 cursor-pointer ">Home</li>
         </NavLink>
         
-        <NavLink to={'/home/your-components'}>
+        <NavLink to={'your-components'}>
           <li className="my-1 cursor-pointer">Your Components</li>
         </NavLink>
         

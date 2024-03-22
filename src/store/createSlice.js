@@ -27,9 +27,10 @@ export default slice.reducer
 export function fetchUser () {
     return async function getUser(dispatch, getState) {
         const userData = await account.get()
-        .then(
+        userData.then(
             function(response) {
                 dispatch(login(response))
+                console.log(response)
             },
             function(error) {
                 console.log('user not found!')

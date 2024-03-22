@@ -23,7 +23,7 @@ function Home() {
       if(isLoggedIn===false) {
       navigate('/login')
       }
-    } }>Add Components</Button>
+    } }>Add Component</Button>
     </div>
     
     <div className='p-2 mx-10'>
