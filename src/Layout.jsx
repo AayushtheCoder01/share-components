@@ -8,7 +8,10 @@ function Layout() {
 
   return (
     <>
-        <NewHeader/>
+    <div className='fixed  w-full top-0 left-0 '>
+      <NewHeader/>
+    </div>
+        
         <Outlet/>
     </>
     

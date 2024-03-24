@@ -7,10 +7,10 @@ function Card({data, collectionId}) {
   const htmlString = code;
   const parsedHtml = parse(htmlString);
   return (
-<div className="w-12/12 mb-5 h-auto">
+<div className="w-12/12 mb-5 h-auto m-2 wiauto max-w-[300px]">
   <div className="w-12/12 h-auto">
-    <div className="min-w-[350px] h-auto mx-auto bg-white rounded-md overflow-hidden shadow-md m-0">
-      <div className="flex p-2 items-center justify-center overflow-hidden bg-gray-200 h-48">
+    <div className="min-w-[300px] h-auto mx-auto bg-white rounded-md overflow-hidden shadow-md m-0">
+      <div className="flex p-2 items-center justify-center overflow-hidden bg-gray-200 h-48 overflow-hidden"> 
         {parsedHtml}
       </div>
       <div className="p-4">

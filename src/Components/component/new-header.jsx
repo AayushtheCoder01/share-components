@@ -23,7 +23,7 @@ export function NewHeader() {
 
   return (
     <>
-    <header className="flex px-5 items-center h-16 bg-gray-100 px-4 w-full shrink-0">
+    <header className="flex px-5 items-center h-16 bg-gray-100 px-4 w-full shrink-0 top-0">
       <div onClick={() => {
         setNavBtn(!navBtn)
       }} className="m-2 mr-4 md:hidden cursor-pointer">{navBtn? <MdOutlineKeyboardArrowUp size={'25'}/> : <IoIosArrowDown size={'25'}/>}</div>
@@ -31,8 +31,14 @@ export function NewHeader() {
         <MountainIcon className="h-6 w-6" />
         <span className="sr-only">Acme Inc</span>
       </NavLink>
-      <NavLink className="mr-6 text-lg hidden md:block" href="#">
-        Home
+            <NavLink to={'/home'} className={({isActive})=> `py-2 mb-1 ${isActive? 'text-blue-600' : ' text-black'} cursor-pointer rounded-md`} href="#">
+
+      <span className="mx-4 font-medium">Home</span>
+      </NavLink>
+
+      <NavLink to={'/your-components'} className={({isActive})=> `py-2 mb-1 ${isActive? 'text-blue-600' : ' text-black'} py-2 mb-1 cursor-pointer mb-[2px] rounded-md`} href="#">
+
+      <span className="mx-4 font-medium">Your Components</span>
       </NavLink>
       <div className="flex items-center space-x-4 ml-auto px-4">
         {user.name? <div className="text-lg hidden md:block font-semibold text-gray-500 border border-green-300 bg-green-100 p-1 px-3 rounded-3xl">{user.name}</div> : ""}

@@ -32,12 +32,12 @@ function Component() {
     
   return (
     <>
-    {isLoading? <p className='text-center mt-20'>Loading...</p> :<div className='flex mt-10 w-full overflow-hidden'>
+    {isLoading? <p className='text-center mt-20'>Loading...</p> :<div className='flex mt-10 w-full'>
       <div className=''>
-        <SideNavbar></SideNavbar>
+        {/* <SideNavbar></SideNavbar> */}
       </div>
       
-      <div className="flex flex-col w-full md:pl-20 md:w-10/12 h-auto overflow-y-auto scroll">
+      <div className="flex flex-wrap w-full justify-center block h-auto scroll">
         {data.map(item => (
           <Card key={item.$id} data={item} collectionId={'65e8b7272cd65c037a79'}/> 
         ))}

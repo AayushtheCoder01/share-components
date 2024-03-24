@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { account } from '../appwrite/appwriteConfig'
+import { useNavigate } from "react-router-dom";
 const initialState = {
     isLoggedIn: false,
     user: {}
@@ -26,11 +27,13 @@ export default slice.reducer
 
 export function fetchUser () {
     return async function getUser(dispatch, getState) {
+        const navigate = useNavigate()
         const userData = await account.get()
         userData.then(
             function(response) {
                 dispatch(login(response))
                 console.log(response)
+                navigate('/home')
             },
             function(error) {
                 console.log('user not found!')

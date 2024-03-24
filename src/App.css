@@ -1,7 +1,8 @@
 .snippit-text{
-  margin-left: 14%;
-  margin-bottom: 2rem;
-  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
 }
 .urlBtn{
   transition-delay: 0.01s;

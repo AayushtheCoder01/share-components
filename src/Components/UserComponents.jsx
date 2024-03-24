@@ -128,9 +128,9 @@ function UserComponents() {
     </div>
 
     <div className='flex flex-row w-full mt-10 p-2 px-10'>
-      <SideNavbar/>
+      {/* <SideNavbar/> */}
 
-      <div className="flex flex-col flex-wrap w-full md:pl-20 md:w-9/12 overflow-y-auto">
+      <div className="flex flex-col flex-wrap w-full md:pl-20 md:w-12/12 overflow-y-auto">
         {loading? <p className='text-center'>Loading...</p>: isLoggedIn? userData.map(id => (
           <DataLoader key={id} userData={id} collectionId={'65f305269a55fcffc6eb'}/> 
         )) : <p className='text-center'>Please Login!</p>}
