@@ -48,6 +48,7 @@ function UserComponents() {
           createUserComponentsArr(userId)
         }
       }
+      
       if(!isLoggedIn) {
         setLoading(false)
       } else{
