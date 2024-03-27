@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import { Alert, AlertDescription, AlertTitle } from "../Components/ui/alert"
 import FormCard from './component/form-card'
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import { useMutation } from '@tanstack/react-query'
+
 function CreateComponent() {
   const [uploadDone, setUplaodDone] = useState(false)
   const navigate = useNavigate()
@@ -12,27 +14,33 @@ function CreateComponent() {
   const [component, setComponent] = useState("")
   const [description, setDescription] = useState("")
 
+  const mutation = useMutation({
+    mutationFn: ({code, description, component}) => {
+      console.log(code, description, component)
+      const promise = databases.createDocument("65e8b719ab2350ba6fb4", "65e8b7272cd65c037a79", uuidv4(), {
+        code,
+        component,
+        description
+      }).then(
+        function(response) {
+          console.log(response)
+          setUplaodDone(true)
+          setTimeout(() => {
+            navigate('/home')
+          }, 2500);
+        },
+        function(error) {
+          console.log(error)
+        }
+      )
+    }
+  })
 
-  const handleSubmit= async(e) => {
-    e.preventDefault()
 
-    const promise = databases.createDocument("65e8b719ab2350ba6fb4", "65e8b7272cd65c037a79", uuidv4(), {
-      code,
-      component,
-      description
-    }).then(
-      function(response) {
-        console.log(response)
-        setUplaodDone(true)
-        setTimeout(() => {
-          navigate('/home')
-        }, 2500);
-      },
-      function(error) {
-        console.log(error)
-      }
-    )
-  }
+  // const handleSubmit= async(e) => {
+  //   e.preventDefault()
+  // }
+
   return (
     <>
 {uploadDone? 
@@ -52,7 +60,7 @@ function CreateComponent() {
 </div>: ''}
 
 <div className="min-h-full flex flex-col justify-center items-center py-12 sm:px-6 lg:px-8">
-<FormCard handleSubmit={handleSubmit} setCode={setCode} setDescription={setDescription} setComponent={setComponent} />
+<FormCard mutation={mutation} setCode={setCode} setDescription={setDescription} setComponent={setComponent} code={code} description={description} component={component} />
 </div>
 
       {/* <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">

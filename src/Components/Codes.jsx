@@ -8,28 +8,28 @@ import { Button } from './ui/button';
 import { IoIosCopy } from "react-icons/io";
 import { IoMdCheckmark } from "react-icons/io";
 import Preview from './Preview';
+import { useQuery } from '@tanstack/react-query';
  
 
 function Codes() {
   const {id, collection} = useParams()
-  const [code, setCode] = useState()
   const [isCopy, setIsCopy] = useState(false)
   const [isCopyUrl, setIsCopyUrl] = useState(false)
   const location = useLocation();
 
-  const getData = async() => {
-    const promise = databases.getDocument('65e8b719ab2350ba6fb4', collection, id);
+  
+  const {data : code, isLoading} = useQuery({
+    queryKey: ['component', id],
+    queryFn: getData,
+    staleTime: 50000,
+    refetchOnWindowFocus: false
+  })
 
-      promise.then(function (response) {
-          console.log(response); // Success
-          setCode(response.code)
-      }, function (error) {
-          console.log(error); // Failure
-      });
+  async function getData() {
+    const data = await databases.getDocument('65e8b719ab2350ba6fb4', collection, id);
+
+    return data.code
   }
-  useEffect(() => {
-    getData()
-  }, [])
 
   async function copyCode() {
     setIsCopy(true)
@@ -62,13 +62,13 @@ function Codes() {
   return (
     <>
 
-    <div className='flex items-center h-auto mt-10 mb-10 w-full justify-center p-2'>
-      <div className='p-2 bg-gray-100 border border-solid border-gray-200 rounded-lg mt-20'>
+    <div className='flex items-center h-auto mt-20 mb-10 w-full justify-center p-2'>
+      <div className='p-2 bg-gray-100 border border-solid border-gray-200 rounded-lg'>
         <div className='w-full flex justify-center'>
           <h3 className='font-semibold text-lg mb-5 '>Preview</h3>
         </div>
 
-        <div className='mb-2 px-2'>
+        <div className='mb-10 px-2'>
           <Preview code={code}/>
         </div>
             
@@ -85,7 +85,13 @@ function Codes() {
         
 
           {code? <button onClick={copyCode} className={`${isCopy? 'bg-green-500': 'bg-blue-500'} p-1 rounded-sm mx-1 px-2 text-md`}>{isCopy? <IoMdCheckmark /> : <IoIosCopy />}</button> : ''}
-          {code? <button title="copy url to share" onClick={copyUrl} className={`urlBtn ${isCopyUrl? 'bg-blue-500' : 'bg-green-500'} p-1 rounded-sm px-2 mx-1 text-md`}>{isCopyUrl? <IoMdCheckmark size={'1.5rem'}/> : 'share'}</button> : ''}
+          {code? <button title="copy url to share" onClick={copyUrl} className={`urlBtn ${isCopyUrl? 'bg-blue-500' : 'bg-green-500'} p-1 w-[10vw] rounded-sm px-2 mx-1 text-md`}>{isCopyUrl?(<>
+            <div className='flex justify-center items-center'>
+              <IoMdCheckmark size={'1.5rem'} />
+              <p className='text-sm justify-center items-center'>url copied!</p>
+            </div>
+            
+          </>)  : 'share'}</button> : ''}
         </div>
         <CodeSnippit code={code}/>
       </div>

@@ -17,6 +17,7 @@ import Signup from './Components/Signup.jsx'
 import Codes from './Components/Codes.jsx'
 import CreateComponent from './Components/AddNew.jsx'
 import UserComponents, {loaderFunction} from './Components/UserComponents.jsx'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 const router = createBrowserRouter([
   {
@@ -61,13 +62,13 @@ const router = createBrowserRouter([
   }
 ]);
 
-
 const queryClient = new QueryClient()
 ReactDOM.createRoot(document.getElementById('root')).render(
 <QueryClientProvider client={queryClient}>
   <Provider store={store}>
     <React.StrictMode>
       <RouterProvider router={router}/>
+      <ReactQueryDevtools initialIsOpen={false} />
     </React.StrictMode>
   </Provider>
 </QueryClientProvider>

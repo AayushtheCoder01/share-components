@@ -12,11 +12,7 @@ import UserComponents from './Components/UserComponents';
 import { useDispatch } from 'react-redux';
 import { fetchUser } from './store/createSlice';
 function App() {
-
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(fetchUser())
-  }, [])
+  
   return (
     <>
     {/* <hello>hello</hello> */}

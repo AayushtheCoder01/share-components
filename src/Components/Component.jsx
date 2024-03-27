@@ -4,7 +4,7 @@ import Card from './Card'
 import { Functions } from 'appwrite'
 import SideNavbar from './SideNavbar'
 import './components.css'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query';
 
 function Component() {
     const {isLoading, data} = useQuery({
@@ -12,32 +12,18 @@ function Component() {
     })
 
     async function getData() {
-      const data = await databases.listDocuments("65e8b719ab2350ba6fb4", "65e8b7272cd65c037a79")
-  
-      return data.documents
+      const userdata = await databases.listDocuments("65e8b719ab2350ba6fb4", "65e8b7272cd65c037a79")
+      return [...userdata.documents.reverse()]
     }
-    useEffect(() => {
-      // const promise = databases.listDocuments("65e8b719ab2350ba6fb4", "65e8b7272cd65c037a79")
-
-      // promise.then(9
-      //   function(response) {
-      //       setData(response.documents)
-      //       setLoading(false)
-      //   },
-      //   function(error) {
-      //       console.log(error)
-      //   }
-      // )
-    }, [])
     
   return (
     <>
-    {isLoading? <p className='text-center mt-20'>Loading...</p> :<div className='flex mt-10 w-full'>
+    {isLoading? <p className='text-center mt-20'>Loading...</p> :<div className='flex mt-20 w-full'>
       <div className=''>
         {/* <SideNavbar></SideNavbar> */}
       </div>
       
-      <div className="flex flex-wrap w-full justify-center block h-auto scroll">
+      <div className="flex flex-wrap w-full justify-center h-auto scroll">
         {data.map(item => (
           <Card key={item.$id} data={item} collectionId={'65e8b7272cd65c037a79'}/> 
         ))}

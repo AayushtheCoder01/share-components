@@ -9,8 +9,15 @@ import { Button } from "../ui/button"
 import { Label } from "../ui/label"
 import { useNavigate } from "react-router-dom"
 
-export default function FormCard({handleSubmit, setCode, setComponent, setDescription}) {
+export default function FormCard({mutation, setCode, setComponent, setDescription, code, description, component}) {
   const navigate = useNavigate()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    mutation.mutate({
+       code: code, description: description, component: component,
+    })
+  }
   return (
     (
     <Card className="w-full max-w-lg">
@@ -30,7 +37,8 @@ export default function FormCard({handleSubmit, setCode, setComponent, setDescri
     </div>
 </div>
       </div>
-      <form onSubmit={(e) => handleSubmit(e)} className="grid gap-2 p-6">
+      <form onSubmit={(e) => handleSubmit(e)}
+       className="grid gap-2 p-6">
         <CardHeader className="p-0">
           <div className="flex items-center space-x-4">
             <h2 className="text-lg font-bold">Add Snippet</h2>

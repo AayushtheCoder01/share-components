@@ -9,6 +9,8 @@ import {v4 as uuidv4} from 'uuid'
 import DataLoader from './DataLoader'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { useMutation } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 
 function UserComponents() {
   const [addComponent, setAddComponents] = useState(false)
@@ -25,60 +27,32 @@ function UserComponents() {
   const isLoggedIn = useSelector((state) => state.isLoggedIn)
 
 
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
 
 
-    useEffect(()=> {
-      async function deployer() {
-        const userId = await account.get()
-        try {
-          const promise = await databases.getDocument(
-            '65e8b719ab2350ba6fb4',
-            '65f025095099df66de90',
-             userId.$id,
-      ).then(
-        function(response) {
-          setUserData(response.userComponentsCollectionID)
-          setLoading(false)
-        }
-      )
-        } catch (error) {
-          createUserComponentsArr(userId)
-        }
-      }
-      
-      if(!isLoggedIn) {
-        setLoading(false)
-      } else{
-        deployer()
-      }
+  async function getData() {
+    setLoading(true)
+    const user = await account.get()
+    const userData = await databases.getDocument("65e8b719ab2350ba6fb4", "65f025095099df66de90", user.$id)
+    setLoading(false)
+    return setUserData(userData.userComponentsCollectionID)
+  }
+    
+    
+    if(isLoggedIn) {
+      const { isLoading, data, error } = useQuery({
+      queryKey:["userComponents"] , queryFn: getData, staleTime: 10000, refetchOnWindowFocus: false,
+    })
+    }
 
+        
+    const mutation = useMutation({
+      mutationFn: ({code, description, component}) => {
 
-        async function createUserComponentsArr(userId) {
-          const createDocument = await databases.createDocument(
-            '65e8b719ab2350ba6fb4',
-            '65f025095099df66de90',
-            userId.$id,
-            {
-              userComponentsCollectionID,
-              "name" : userId.name
-            }
-          )
-        }
-        if(isLoggedIn===true) {
-          createUserComponentsArr()
-          setLoading(false)
-        }
-          
-    }, [])
-
-
-    const handleSubmit = async (e) => {
-      e.preventDefault()
       let documentId = uuidv4()
-      const promise = await databases.createDocument("65e8b719ab2350ba6fb4", "65f305269a55fcffc6eb", documentId, {
+      const promise = databases.createDocument("65e8b719ab2350ba6fb4", "65f305269a55fcffc6eb", documentId, {
       code,
       component,
       description
@@ -90,7 +64,8 @@ function UserComponents() {
         console.log(error)
       }
     )
-    }
+  }
+})
 
     const updateDocument = async (id) => {
       const userId = await account.get()
@@ -114,17 +89,13 @@ function UserComponents() {
 
   return (
     <>
-    {/* <div className=''>
-      <NewHeader/>
-    </div> */}
-
-    <div className='flex justify-center m-1 mt-5'><Button onClick={() => {
+    <div className='flex justify-center mt-20'><Button onClick={() => {
       if(isLoggedIn===true) setAddComponents(!addComponent)
       if(isLoggedIn===false) navigate('/login')
     }}>Add Component</Button></div>
     
     <div className='flex w-screen justify-center h-auto'>
-      {addComponent? <FormCard handleSubmit={handleSubmit} setCode={setCode} setDescription={setDescription} setComponent={setComponent}/> : ''}
+      {addComponent? <FormCard mutation={mutation} setCode={setCode} setDescription={setDescription} setComponent={setComponent} code={code} description={description} component={component} /> : ''}
     </div>
 
     <div className='flex flex-row w-full mt-10 p-2 px-10'>

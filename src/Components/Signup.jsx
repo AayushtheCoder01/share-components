@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { account } from '../appwrite/appwriteConfig'
 import { useNavigate } from 'react-router-dom'
 import {v4 as uuidv4} from 'uuid'
-
+import { useMutation } from '@tanstack/react-query'
 import { FaGoogle } from "react-icons/fa";
+import { databases } from '../appwrite/appwriteConfig'
 
 function Signup() {
   const navigate = useNavigate()
@@ -13,15 +14,41 @@ function Signup() {
     password: "",
   })
 
-  //Signup with email and password
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  //create user database.
+  // const mutation = useMutation({
+  //   mutationFn: ({user}) => {
+  //     const createDocument = databases.createDocument(
+  //       '65e8b719ab2350ba6fb4',
+  //       '65f025095099df66de90',
+  //       user.$id,
+  //       {
+  //         userComponentsCollectionID : null,
+  //         "name" : user.name
+  //       }
+  //     ).then(
+  //       function(response) {
+  //         console.log('database created', user)
+  //         navigate('/home')
+  //       },
+  //       function(error) {
+  //         console.log(error)
+  //       }
+  //     )
+  //   }
+  // })
 
-    const promise = account.create(uuidv4(), userDetails.email, userDetails.password, userDetails.name);
-
-    promise.then(
+  async function createDatabase(user) {
+    const createDocument = databases.createDocument(
+      '65e8b719ab2350ba6fb4',
+      '65f025095099df66de90',
+      user.$id,
+      {
+        'userComponentsCollectionID' : null,
+        "name" : user.name
+      }
+    ).then(
       function(response) {
-        console.log(response)
+        console.log('database created', user)
         navigate('/home')
       },
       function(error) {
@@ -29,6 +56,24 @@ function Signup() {
       }
     )
   }
+
+  //Signup with email and password
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    const promise = account.create(uuidv4(), userDetails.email, userDetails.password, userDetails.name)
+    .then(
+      function(response) {
+        console.log(response)
+        createDatabase(response)
+        
+      },
+      function(error) {
+        console.log(error)
+      }
+    )
+  }
+
 
   return (
     <>

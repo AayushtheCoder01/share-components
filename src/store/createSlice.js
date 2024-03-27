@@ -29,7 +29,7 @@ export function fetchUser () {
     return async function getUser(dispatch, getState) {
         const navigate = useNavigate()
         const userData = await account.get()
-        userData.then(
+        .then(
             function(response) {
                 dispatch(login(response))
                 console.log(response)

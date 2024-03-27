@@ -15,8 +15,8 @@ function Home() {
   return (
     <>
 
-    <div className='flex h-auto  m-1 mt-5 w-full justify-center'>
-    <Button onClick={() => {
+    <div className='flex h-auto  m-1 mt-10 w-full justify-center'>
+    <Button className='mt-10' onClick={() => {
       if(isLoggedIn===true) {
       navigate('/home/add-component')
       }
