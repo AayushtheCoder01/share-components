@@ -29,7 +29,7 @@ export function NewHeader() {
       
       <NavLink className="mr-4 md:ml-2" to={'/home'}>
         <span className="hidden text-xl font-semibold md:inline ">Share Components</span>
-        <img className="h-[35px] w-[35px] mx-2 rounded-3xl inline" alt="site logo" src="../src/assets/sharecomponents.logo.png"/>
+        <img className="h-[35px] w-[35px] mx-2 rounded-3xl inline" alt="site logo" src="../../src/assets/Logo png.png"/>
       </NavLink>
 
       <div className="hidden md:flex">
