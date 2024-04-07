@@ -22,7 +22,7 @@ export function NewHeader() {
 
   return (
     <>
-    <header className="flex px-5  items-center h-16 bg-gray-100 px-4 w-full shrink-0 top-0">
+    <header className="flex px-5 items-center h-16 bg-gray-100 px-4 w-full shrink-0 top-0">
       <div onClick={() => {
         setNavBtn(!navBtn)
       }} className="m-2 mr-4 md:hidden cursor-pointer">{navBtn? <MdOutlineKeyboardArrowUp size={'25'}/> : <IoIosArrowDown size={'25'}/>}</div>
